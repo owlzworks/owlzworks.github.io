@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>부엉이공방 · owlzworks</title>
+  <meta name="description" content="부엉이공방(owlzworks) — 작은 소프트웨어 공방. 사용자를 존중하는 앱과 디지털 제품을 정성껏 만듭니다.">
+  <meta property="og:title" content="부엉이공방 · owlzworks">
+  <meta property="og:description" content="작은 소프트웨어 공방 — 사용자를 존중하는 앱과 디지털 제품을 만듭니다.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-lang="ko">
+  <button id="lang" class="lang" type="button" aria-label="언어 / Language">
+    <span data-ko-active>한</span><span class="sep">/</span><span data-en-active>EN</span>
+  </button>
+
+  <main class="wrap">
+    <img class="owl" src="assets/owl.png" width="760" height="677"
+         alt="부엉이공방 로고 — 노트북을 보는 부엉이">
+
+    <h1 class="brand">부엉이공방</h1>
+    <p class="brand-en">owlzworks</p>
+
+    <p class="tagline" data-ko="작은 소프트웨어 공방"
+       data-en="A small software workshop">작은 소프트웨어 공방</p>
+
+    <p class="intro"
+       data-ko="사용자를 존중하는 앱과 디지털 제품을 정성껏 만듭니다."
+       data-en="We craft apps and digital products that respect the people who use them.">사용자를 존중하는 앱과 디지털 제품을 정성껏 만듭니다.</p>
+
+    <ul class="points">
+      <li data-ko="작게, 오래 쓸 수 있게"
+          data-en="Small, and built to last">작게, 오래 쓸 수 있게</li>
+      <li data-ko="사용자 경험과 프라이버시를 먼저"
+          data-en="User experience &amp; privacy first">사용자 경험과 프라이버시를 먼저</li>
+    </ul>
+
+    <a class="contact" href="mailto:owl.works.one@gmail.com">
+      <span data-ko="문의하기" data-en="Get in touch">문의하기</span>
+    </a>
+  </main>
+
+  <footer class="foot">© 2026 부엉이공방 · owlzworks</footer>
+
+  <script>
+    (function () {
+      var KEY = 'owl-lang';
+      function apply(lang) {
+        document.documentElement.lang = lang;
+        document.body.setAttribute('data-lang', lang);
+        var nodes = document.querySelectorAll('[data-ko]');
+        for (var i = 0; i < nodes.length; i++) {
+          var el = nodes[i];
+          el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ko');
+        }
+      }
+      var lang = localStorage.getItem(KEY) || 'ko';
+      apply(lang);
+      document.getElementById('lang').addEventListener('click', function () {
+        lang = document.documentElement.lang === 'ko' ? 'en' : 'ko';
+        localStorage.setItem(KEY, lang);
+        apply(lang);
+      });
+    })();
+  </script>
+</body>
+</html>

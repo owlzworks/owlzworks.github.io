@@ -1,0 +1,141 @@
+:root {
+  --cream: #F9F0DF;       /* page bg — matches the logo's background exactly */
+  --ink: #4a3320;         /* body text */
+  --brown: #8C582B;       /* logo stroke / accents */
+  --brown-deep: #6e4421;  /* headings, CTA */
+  --muted: #9c8467;       /* secondary text */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "Noto Sans KR", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Language toggle */
+.lang {
+  position: fixed;
+  top: 20px; right: 22px;
+  background: rgba(255, 255, 255, .35);
+  border: 1px solid rgba(110, 68, 33, .3);
+  color: var(--brown-deep);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 13px;
+  letter-spacing: .02em;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+}
+.lang .sep { opacity: .35; margin: 0 6px; }
+.lang [data-ko-active], .lang [data-en-active] { opacity: .42; transition: opacity .15s; }
+body[data-lang="ko"] .lang [data-ko-active] { opacity: 1; font-weight: 700; }
+body[data-lang="en"] .lang [data-en-active] { opacity: 1; font-weight: 700; }
+
+/* Hero column */
+.wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 88px 24px 56px;
+}
+
+.owl {
+  width: 300px;
+  max-width: 72vw;
+  height: auto;
+  display: block;
+  /* image bg already equals --cream, so it sits seamlessly on the page */
+}
+
+.brand {
+  font-family: "Noto Serif KR", serif;
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: var(--brown-deep);
+  letter-spacing: .01em;
+  margin-top: 6px;
+}
+.brand-en {
+  font-size: .8rem;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--brown);
+  opacity: .85;
+  margin-top: 7px;
+  padding-left: .34em; /* optical balance for letter-spacing */
+}
+
+.tagline {
+  font-family: "Noto Serif KR", serif;
+  font-weight: 500;
+  font-size: 1.35rem;
+  color: var(--brown);
+  margin-top: 32px;
+}
+.intro {
+  font-size: 1rem;
+  color: var(--ink);
+  opacity: .88;
+  margin-top: 14px;
+  max-width: 30em;
+}
+
+.points {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.points li {
+  font-size: .9rem;
+  color: var(--brown-deep);
+  border: 1px solid rgba(140, 88, 43, .3);
+  border-radius: 999px;
+  padding: 7px 16px;
+  background: rgba(255, 255, 255, .4);
+}
+
+.contact {
+  margin-top: 40px;
+  display: inline-block;
+  text-decoration: none;
+  background: var(--brown-deep);
+  color: var(--cream);
+  padding: 13px 32px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: .95rem;
+  letter-spacing: .01em;
+  transition: transform .12s ease, background .15s ease;
+}
+.contact:hover { background: #5a3717; transform: translateY(-1px); }
+
+.foot {
+  text-align: center;
+  padding: 24px;
+  font-size: .78rem;
+  color: var(--muted);
+}
+
+@media (max-width: 480px) {
+  .brand { font-size: 1.85rem; }
+  .tagline { font-size: 1.18rem; }
+  .wrap { padding-top: 64px; }
+}
