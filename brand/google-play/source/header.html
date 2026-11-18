@@ -1,0 +1,87 @@
+<!doctype html>
+<!-- Google Play developer page header. 2048x1152 CSS px, captured at scale 2 => 4096x2304.
+     The background lives in a "scene" laid out in the source image's own pixels (1672x941, 16:9 = no crop),
+     so the laptop / mug logos are positioned in source coordinates and scale with it. -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700&display=block" rel="stylesheet">
+<style>
+  :root { --ink:#3d2a1c; --soft:#5b4636; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:2048px; height:1152px; overflow:hidden; }
+  body { position:relative; background:#f3e6ea; font-family:"Nunito", sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; }
+
+  .scene {
+    position:absolute; left:0; top:0; width:1672px; height:941px;
+    background:url(header-bg.png) 0 0 / 100% 100% no-repeat;
+    transform-origin:0 0; transform:scale(1.224880);
+  }
+  .scene svg { position:absolute; overflow:visible; }
+  /* laptop lid: flat plane mapped onto the lid quad via matrix3d (set by script) */
+  .lid { position:absolute; left:0; top:0; width:1150px; height:1000px; transform-origin:0 0; }
+  .lid svg { left:50%; top:50%; height:250px; width:auto; aspect-ratio:987/1026; transform:translate(-50%,-50%);
+             color:#F0EEE9; opacity:.92; filter:drop-shadow(0 0 10px rgba(255,255,255,.55)) blur(.6px); }
+  /* mug: printed on the front of the cup */
+  .mug { left:793px; top:704px; height:36px; width:auto; aspect-ratio:987/1026; transform:translate(-50%,-50%);
+          color:#5b4636; opacity:.85; mix-blend-mode:multiply; filter:blur(.25px); }
+
+  /* content sits in the open sky of the window (window centre ~ source x 625, nudged right to clear the leaves) */
+  .veil {
+    position:absolute; inset:0;
+    background:rgba(255,249,244,.5);
+    backdrop-filter:blur(4px);
+    -webkit-mask-image:radial-gradient(ellipse 22% 24% at 37.6% 48%, #000 40%, transparent 100%);
+            mask-image:radial-gradient(ellipse 22% 24% at 37.6% 48%, #000 40%, transparent 100%);
+  }
+  .stack {
+    position:absolute; left:37.6%; top:48%; transform:translate(-50%,-50%) scale(.78);
+    display:flex; flex-direction:column; align-items:center; text-align:center; white-space:nowrap;
+  }
+  .brand { display:flex; align-items:center; gap:34px; }
+  .owl { height:190px; width:auto; aspect-ratio:987/1026; color:var(--ink); display:block; }
+  .word { font-family:"Fredoka", sans-serif; font-weight:600; font-size:120px; line-height:1; letter-spacing:-.005em; }
+  .tag { font-family:"Fredoka", sans-serif; font-weight:500; font-size:25px; letter-spacing:.26em; margin-top:18px; color:var(--soft); padding-left:.26em; }
+  .rule { width:120px; height:2px; background:rgba(61,42,28,.3); border-radius:1px; margin:40px 0 30px; }
+  .lead { font-weight:700; font-size:36px; line-height:1.36; }
+  .points { margin-top:16px; font-weight:600; font-size:28px; color:var(--soft); }
+</style></head>
+<body>
+  <svg width="0" height="0" style="position:absolute"><symbol id="owl" viewBox="140 120 987 1026"><g fill="currentColor">
+<path d="M 254 298 C 157.34 385.75 116.98 526.96 165.8 650 C 180.26 686.43 202.72 716.85 228 746 C 172.57 808.15 142.84 894.35 156.25 978 C 170 1063.81 244.82 1149.33 338 1140 C 241.97 1060.91 264.87 906.59 341.14 821 C 372.37 785.95 410.05 764.62 454 750 C 420.91 745.06 387.7 734.36 360 714.98 C 281.97 660.4 254.28 552.95 294.29 467 C 338.94 371.12 468.06 319.43 563 372.29 C 590.62 387.68 612.43 410.77 631 436 C 645.82 433.53 665.69 403.77 680 392.44 C 711.54 367.45 750.37 351.09 791 351.07 C 953.34 351.01 1043.62 546.54 948.62 674 C 910.97 724.53 858.44 740.32 800 753.12 C 783.88 756.65 742.88 764.15 741 782 C 769.95 785.61 800.75 783 830 783 C 884.97 783 940.16 783 995 783 C 1096.32 710.79 1144.01 574.5 1112.55 454 C 1096.79 393.67 1064.99 341.41 1022 297 C 1049.88 260.55 1064.47 213.4 1049.67 168 C 1044.52 152.22 1035.44 133.29 1019 126.87 C 993.36 116.85 975.84 151.29 962.74 167 C 932.91 202.81 892.68 237.45 844 240.98 C 813.12 243.21 784.05 232.63 754 227.41 C 710.83 219.92 666.71 214.63 623 215.13 C 583.37 215.57 542.83 221.08 504 229.2 C 472.12 235.87 442.66 245.99 410 237.37 C 370.76 227.02 339.23 198.62 314 168 C 301.46 152.78 285.63 122.36 262 125.28 C 241.45 127.82 229.62 152.65 224.37 170 C 210.17 217.03 227.44 259.96 254 298 Z"/>
+<path d="M 710 798 C 689.98 801.47 678.79 809.73 668 827 C 650.59 869.9 631.39 912.47 612.8 955 C 598.31 988.15 586.35 1023.33 569 1055 C 509.79 1055 450.26 1055 391 1055 C 367.81 1061.92 354.89 1076.65 353 1101 C 355.82 1122.46 366.23 1134.8 387 1141 C 577.27 1141 767.73 1141 958 1141 C 993.32 1130.7 1002.09 1102.17 1015.38 1071 C 1036.55 1021.35 1057.55 971.63 1078.8 922 C 1090.37 894.98 1108.58 864.6 1110 835 C 1105.65 810.18 1090.11 799.86 1066 798 C 1029.97 800.56 992.58 796.65 956 798 C 874.29 801.03 791.62 798.01 710 798 Z"/>
+<circle cx="477" cy="551" r="69.2"/>
+<circle cx="789" cy="551" r="69.2"/>
+<path d="M 629 576 C 614.46 584.44 602.06 597.59 592 611 C 592.74 626.63 605.48 638.88 614.85 651 C 618.11 655.2 621.22 660.98 626.01 663.62 C 629.25 665.41 632.45 664.81 636 665 C 650.75 655.34 672.44 629.22 674 611 C 663.03 596.38 648.33 576.91 629 576 Z"/>
+  </g></symbol></svg>
+
+  <div class="scene">
+    <div class="lid" id="lid"><svg viewBox="0 0 987 1026"><use href="#owl" width="987" height="1026"/></svg></div>
+    <svg class="mug" viewBox="0 0 987 1026"><use href="#owl" width="987" height="1026"/></svg>
+  </div>
+
+  <div class="veil"></div>
+  <div class="stack">
+    <div class="brand">
+      <svg class="owl" viewBox="0 0 987 1026"><use href="#owl" width="987" height="1026"/></svg>
+      <div class="name">
+        <div class="word">OwlzWorks</div>
+        <div class="tag">A SMALL SOFTWARE WORKSHOP</div>
+      </div>
+    </div>
+    <div class="rule"></div>
+    <p class="lead">We craft apps and digital products<br>that respect the people who use them.</p>
+    <p class="points">Small, and built to last &nbsp;·&nbsp; User experience &amp; privacy first</p>
+  </div>
+
+  <script>
+  // Map the flat lid plane onto the laptop lid's corners in source px.
+  const LID = { tl:[1111,512], tr:[1360,517], bl:[1030,753], br:[1293,748] };
+  function adj(m){return[m[4]*m[8]-m[5]*m[7],m[2]*m[7]-m[1]*m[8],m[1]*m[5]-m[2]*m[4],m[5]*m[6]-m[3]*m[8],m[0]*m[8]-m[2]*m[6],m[2]*m[3]-m[0]*m[5],m[3]*m[7]-m[4]*m[6],m[1]*m[6]-m[0]*m[7],m[0]*m[4]-m[1]*m[3]];}
+  function mm(a,b){const c=[];for(let i=0;i<3;i++)for(let j=0;j<3;j++){let s=0;for(let k=0;k<3;k++)s+=a[3*i+k]*b[3*k+j];c[3*i+j]=s;}return c;}
+  function mv(m,v){return[m[0]*v[0]+m[1]*v[1]+m[2]*v[2],m[3]*v[0]+m[4]*v[1]+m[5]*v[2],m[6]*v[0]+m[7]*v[1]+m[8]*v[2]];}
+  function basis(p){const m=[p[0][0],p[1][0],p[2][0],p[0][1],p[1][1],p[2][1],1,1,1];const v=mv(adj(m),[p[3][0],p[3][1],1]);return mm(m,[v[0],0,0,0,v[1],0,0,0,v[2]]);}
+  const W=1150,H=1000;
+  const s=basis([[0,0],[W,0],[0,H],[W,H]]), d=basis([LID.tl,LID.tr,LID.bl,LID.br]);
+  let t=mm(d,adj(s)); t=t.map(x=>x/t[8]);
+  document.getElementById("lid").style.transform=`matrix3d(${t[0]},${t[3]},0,${t[6]},${t[1]},${t[4]},0,${t[7]},0,0,1,0,${t[2]},${t[5]},0,1)`;
+  </script>
+</body></html>
