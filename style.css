@@ -1,7 +1,7 @@
 :root {
-  --cream: #F9F0DF;       /* page bg — matches the logo's background exactly */
+  --cream: #F9F0DF;       /* page bg */
   --ink: #4a3320;         /* body text */
-  --brown: #8C582B;       /* logo stroke / accents */
+  --brown: #8C582B;       /* accents */
   --brown-deep: #6e4421;  /* headings, CTA */
   --muted: #9c8467;       /* secondary text */
 }
@@ -55,11 +55,13 @@ body[data-lang="en"] .lang [data-en-active] { opacity: 1; font-weight: 700; }
 }
 
 .owl {
-  width: 300px;
-  max-width: 72vw;
+  width: 200px;
+  max-width: 44vw;
   height: auto;
+  aspect-ratio: 987 / 1026; /* matches the cropped viewBox */
   display: block;
-  /* image bg already equals --cream, so it sits seamlessly on the page */
+  color: var(--brown-deep); /* logo is drawn with fill="currentColor" */
+  margin-bottom: 22px;
 }
 
 .brand {
